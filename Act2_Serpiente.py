@@ -13,29 +13,43 @@ from turtle import *
 from random import randrange
 from freegames import square, vector
 
+#Posición inicial de la comida
 food = vector(0, 0)
+#Posición inical de la serpiente
 snake = [vector(10, 0)]
+#Dirección inicial de la serpiente
 aim = vector(0, -10)
 
 def change(x, y):
     "Change snake direction."
+    #Asigna la dirección x a aim.x    
     aim.x = x
+    #Asigna la dirección y a aim.y
     aim.y = y
 
 def inside(head):
     "Return True if head inside boundaries."
+    #Si la cabeza se encuentra dentro de los límites de la pantalla
+        #retorna True
     return -200 < head.x < 190 and -200 < head.y < 190
 
 def move():
     "Move snake forward one segment."
+    #Hace una copia del ultimo valor de snake, el cual es la cabeza
     head = snake[-1].copy()
+    #Cambia el valor de Head en base a aim
     head.move(aim)
 
+    #Verifica si la cabeza está dentro de los limites o no está dentro del cuerpo
     if not inside(head) or head in snake:
+        #Genera un cuadro rojo de 9 px donde está la cabeza
         square(head.x, head.y, 9, 'red')
+        #Actualiza la pantalla
         update()
+        #Termina el juego
         return
-
+    
+    #Mete la nueva cabeza al final del array snake
     snake.append(head)
 
     if head == food:
