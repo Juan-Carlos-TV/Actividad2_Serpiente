@@ -20,6 +20,19 @@ snake = [vector(10, 0)]
 #Dirección inicial de la serpiente
 aim = vector(0, -10)
 
+#Listas de colores para snake y food
+SnakeColor = ['blue', 'green','orange', 'purple', 'black']
+FoodColor = ['blue', 'green','orange', 'purple', 'black']
+
+#El color va a ser un valor al alzar entre las posiciones 0 y 5
+i = randrange(0,5)
+j = randrange(0,5)
+
+#Ciclo para que los colores no sean iguales
+while i == j:
+    j = randrange(0,5)
+
+
 def change(x, y):
     "Change snake direction."
     #Asigna la dirección x a aim.x    
@@ -69,12 +82,14 @@ def move():
     clear()
 
     #Por cada pieza del vector snake (body) dibuja un cuadrado con la posicion
-    #X y Y de 9 pixeles yd e color negro
+    #X y Y
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        #El color va depender del valor aleatorio de i
+        square(body.x, body.y, 9, SnakeColor[i])
 
-    #Dibuja un cuadro para la comida con las coordenadas X y Y de 9 pixeles y de color verde
-    square(food.x, food.y, 9, 'green')
+    #Dibuja un cuadro para la comida con las coordenadas
+        #X y Y con un color aleatorio
+    square(food.x, food.y, 9, FoodColor[j])
     #Actualiza la pantalla
     update()
     #La operacion se realiza cada 100 milisegundos
