@@ -94,6 +94,36 @@ def move():
     update()
     #La operacion se realiza cada 100 milisegundos
     ontimer(move, 100)
+    
+def move_food():
+    #Mueve la comida una posición de forma aleatoria
+    #Lista de posibles movimientos de comida
+    moveList = [[10,0],[-10,0],[0,10],[0,-10],[10,10],[-10,-10],[-10,10],[10,-10]]
+    #Se selecciona un movimiento al azar
+    indx = randrange (0,8)
+    #Se modifica el valor de comida
+    food.x += moveList[indx][0]
+    food.y += moveList[indx][1]
+
+    #Verifica si en algún momento la comida está fuera
+        #O está en el mismo nivel de la cabeza de tal
+        #Manera de que no se lo salta
+    if not inside(food) or food == snake[-1]:
+        #Si se cumple cualquiera de estas condiciones la comida
+            #anula el movimiento anterior y realiza el movimiento inverso
+            #simulando un rebote
+        if indx%2 == 0:
+            food.x += moveList[indx+1][0]
+            food.y += moveList[indx+1][1]
+            food.x += moveList[indx+1][0]
+            food.y += moveList[indx+1][1]
+        else:
+            food.x += moveList[indx-1][0]
+            food.y += moveList[indx-1][1]
+            food.x += moveList[indx-1][0]
+            food.y += moveList[indx-1][1]
+             
+    ontimer(move_food, 600)
 #Configura el tamano de la ventana y posicion de la ventana
 setup(420, 420, 370, 0)
 #Esconde el puntero
@@ -108,4 +138,5 @@ onkey(lambda: change(-10, 0), 'Left')
 onkey(lambda: change(0, 10), 'Up')
 onkey(lambda: change(0, -10), 'Down')
 move()
+move_food()
 done()
