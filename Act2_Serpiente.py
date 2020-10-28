@@ -1,13 +1,5 @@
-"""Snake, classic arcade game.
-
-Exercises
-
-1. How do you make the snake faster or slower?
-2. How can you make the snake go around the edges?
-3. How would you move the food?
-4. Change the snake to respond to arrow keys.
-
-"""
+#Juan Carlos Triana Vela A00827629
+#Enrique Jose Garcia A00827858
 
 from turtle import *
 from random import randrange
@@ -60,7 +52,8 @@ def move():
         #Actualiza la pantalla
         update()
         #Termina el juego
-        return
+        print('Fin del juego')
+        exit()
     
     #Mete la nueva cabeza al final del array snake
     snake.append(head)
